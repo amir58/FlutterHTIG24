@@ -39,7 +39,7 @@ class FirstPage extends StatelessWidget {
         ],
       ),
       // Layouts => Column , Row , Stack
-      body: Container(
+      body: SizedBox(
         width: double.infinity,
         child: Column(
           // Main  => Vertical
@@ -91,28 +91,61 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: const Text("Login"),
       ),
       body: SizedBox(
         width: double.infinity,
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            TextFormField(),
-            TextFormField(),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "Login",
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              TextFormField(
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.email,
+                  ),
+                ),
               ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text(
-                "Register",
+              const SizedBox(height: 20),
+              TextFormField(
+                obscureText: true,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                  ),
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 15),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+                  onPressed: () {},
+                  child: const Text(
+                    "Login",
+                  ),
+                ),
+              ),
+              Container(
+                margin: const EdgeInsets.only(top: 10),
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () {},
+                  child: const Text('Register'),
+                  style: OutlinedButton.styleFrom(
+                    shape: const StadiumBorder(),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -239,11 +239,56 @@ void main() {
     }
   }
 
-  for(var name in names){
+  for (var name in names) {
     if (name == "Salah") {
       names.remove(name);
     }
   }
 
   print(names);
+  print('-----------------------');
+  // Strings
+
+  String welcome = "Welcome to flutter course";
+  print(welcome.length);
+  print(welcome.isEmpty);
+  print(welcome.isNotEmpty);
+  print(welcome.toLowerCase());
+  print(welcome.toUpperCase());
+  print(welcome.substring(8, 10));
+  print(welcome.substring(19, 25));
+  print(welcome.substring(19));
+
+  // iPhone Iphone
+  print('iPhone'.toLowerCase() == "Iphone".toLowerCase());
+
+  print(welcome.contains("flutter"));
+
+  // trim , trimRight , trimLeft
+  String email = " amir@ gmail .com ";
+  print(email.length);
+  // email = email.trim();
+  print(email.length);
+
+  email = email.replaceAll(" ", "");
+  print(email.length);
+
+  // 01116036002
+  // 0111 6036 002
+  // +201116036002
+  // +20111 6036 002
+  //  00201116036002
+  //  0020111 6036 002
+  //  0020111-6036-002
+  //  +20111-6036-002
+  String phoneNumber = "+20111-6036-002";
+  phoneNumber = phoneNumber.replaceAll(" ", "").replaceAll("-", "");
+  if (phoneNumber.startsWith("00")) {
+    phoneNumber = phoneNumber.replaceFirst("00", "+");
+  } else if (!phoneNumber.startsWith("+"))
+  {
+    phoneNumber = "+2$phoneNumber";
+  }
+
+  print(phoneNumber);
 }
