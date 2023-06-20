@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter24/notes_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -11,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: LoginPage(),
+      home: const NotesScreen(),
     );
   }
 }
@@ -123,26 +124,31 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 15),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
-                  onPressed: () {},
-                  child: const Text(
-                    "Login",
+              Row(
+                children: [
+                  // 2 / 3
+                  Expanded(
+                    flex: 2,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(shape: const StadiumBorder()),
+                      onPressed: () {},
+                      child: const Text(
+                        "Login",
+                      ),
+                    ),
                   ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 10),
-                width: double.infinity,
-                child: OutlinedButton(
-                  onPressed: () {},
-                  child: const Text('Register'),
-                  style: OutlinedButton.styleFrom(
-                    shape: const StadiumBorder(),
+                  const SizedBox(width: 15),
+                  // 1 / 3
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: OutlinedButton.styleFrom(
+                        shape: const StadiumBorder(),
+                      ),
+                      child: const Text('Register'),
+                    ),
                   ),
-                ),
+                ],
               ),
             ],
           ),
