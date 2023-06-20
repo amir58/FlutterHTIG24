@@ -13,11 +13,20 @@
 // final objectName = ClassName();
 // const objectName = ClassName();
 
+import 'package:flutter24/dart/person.dart';
+
 void main() {
   // To show parameters => ctrl + p
   User user1 = User(1,"Ahmed","0125337627", "Cairo");
 
   User user2 = User(2,"Ali", "0105467798", "Alex");
+
+  var person1= Person();
+  person1.setName("Ali");
+  person1.name = "Ahmed";
+  print(person1.getName());
+  print(person1.name);
+
 }
 
 class User {
