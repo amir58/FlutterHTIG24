@@ -21,7 +21,8 @@ void main() {
 
   User user2 = User(2,"Ali", "0105467798", "Alex");
 
-  var person1= Person();
+  var person1= Person(0,"","","");
+  var person2= Person.me(0,"");
   person1.setName("Ali");
   person1.name = "Ahmed";
   print(person1.getName());

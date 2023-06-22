@@ -13,9 +13,19 @@ class Person {
   String _name = "";
   String _phone = "";
   String _age = "";
-  String _dateTime ="2023-06-19 6:53";
+  String _dateTime = "2023-06-19 6:53";
 
-  String getDate(){
+  Person(this._id, this._name, this._phone, this._age);
+
+  Person.one(this._id, this._name);
+
+  Person.name(this._id, this._name);
+
+  Person.me(this._id, this._name);
+
+  Person.you(this._id, this._name);
+
+  String getDate() {
     return _dateTime.split(" ")[0]; // 2023-06-19
   }
 
@@ -23,16 +33,16 @@ class Person {
     return _dateTime.split(" ")[1]; // 6:53
   }
 
-  String getName(){
+  String getName() {
     return "Mr . $_name";
   }
 
-  void setName(String name){
+  void setName(String name) {
     if (name.length < 2) {
       print('Invalid name');
       return;
     }
-    _name= name;
+    _name = name;
   }
 
   String get name => _name;
