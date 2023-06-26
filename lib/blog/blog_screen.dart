@@ -45,17 +45,7 @@ class _BlogScreenState extends State<BlogScreen> {
   ];
 
   @override
-  void initState() {
-    super.initState();
-
-
-  }
-
-  @override
   Widget build(BuildContext context) {
-    print(MediaQuery.of(context).size.height);
-    print(MediaQuery.of(context).size.width);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("Blog"),
@@ -63,8 +53,7 @@ class _BlogScreenState extends State<BlogScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => navigateToAddBlogScreen(),
-        backgroundColor:
-            blogs.length > 1 ? Colors.white : Colors.blueGrey,
+        backgroundColor: blogs.length > 1 ? Colors.white : Colors.blueGrey,
         child: Icon(
           Icons.add,
           color: blogs.length > 1 ? Colors.blueGrey : Colors.white,
