@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "64738709413",
+    "project_id": "flutterhti24",
+    "storage_bucket": "flutterhti24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:64738709413:android:6095a435d0ae01ed0a624c",
+        "android_client_info": {
+          "package_name": "com.comanyname.appname.flutter24"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "64738709413-s6kg5vvksq4vac0mvj2jm6j9vuobd3hv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAwQcXaX7Xn_tsA2v6JuyClRUCcipX27s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "64738709413-s6kg5vvksq4vac0mvj2jm6j9vuobd3hv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

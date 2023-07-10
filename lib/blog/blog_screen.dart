@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter24/blog/add_blog_screen.dart';
 import 'package:flutter24/blog/blog.dart';
+import 'package:flutter24/blog/edit_blog_screen.dart';
 import 'package:flutter24/blog/story_view_screen.dart';
 
 class BlogScreen extends StatefulWidget {
@@ -165,7 +166,9 @@ class _BlogScreenState extends State<BlogScreen> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    navigateToEditBlogScreen(index);
+                  },
                   icon: const Icon(
                     Icons.edit,
                     color: Colors.white,
@@ -214,6 +217,23 @@ class _BlogScreenState extends State<BlogScreen> {
       if (value == null) return;
 
       blogs.add(value);
+      setState(() {});
+    });
+  }
+
+  navigateToEditBlogScreen(int index) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditBlogScreen(
+          blog: blogs[index],
+        ),
+      ),
+    ).then((value) {
+      if (value == null) return;
+
+      // blogs.add(value);
+      blogs[index] = value;
       setState(() {});
     });
   }
