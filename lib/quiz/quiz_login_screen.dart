@@ -1,32 +1,38 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/notes/notes_register_screen.dart';
 import 'package:flutter24/notes/notes_screen.dart';
+import 'package:flutter24/quiz/quiz_admin_screen.dart';
+import 'package:flutter24/quiz/quiz_main_screen.dart';
+import 'package:flutter24/quiz/quiz_register_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class NotesLoginScreen extends StatefulWidget {
+class QuizLoginScreen extends StatefulWidget {
   @override
-  State<NotesLoginScreen> createState() => _NotesLoginScreenState();
+  State<QuizLoginScreen> createState() => _QuizLoginScreenState();
 }
 
-class _NotesLoginScreenState extends State<NotesLoginScreen> {
+class _QuizLoginScreenState extends State<QuizLoginScreen> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
   final auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notes Login"),
+        title: const Text("Quiz Login"),
       ),
       body: SizedBox(
         width: double.infinity,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               const SizedBox(height: 20),
               TextFormField(
@@ -54,6 +60,13 @@ class _NotesLoginScreenState extends State<NotesLoginScreen> {
                 ),
               ),
               const SizedBox(height: 15),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  "Forget password?",
+                ),
+              ),
+              const SizedBox(height: 15),
               Row(
                 children: [
                   // 2 / 3
@@ -75,7 +88,7 @@ class _NotesLoginScreenState extends State<NotesLoginScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NotesRegisterScreen(),
+                            builder: (context) => QuizRegisterScreen(),
                           ),
                         );
                       },
@@ -104,17 +117,33 @@ class _NotesLoginScreenState extends State<NotesLoginScreen> {
       password: password,
     )
         .then((value) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NotesScreen(),
-        ),
-      );
+      checkUserType();
     }).catchError((error) {
       print(error);
       Fluttertoast.showToast(msg: error.toString());
     });
+  }
 
+  void checkUserType() {
+    String userId = auth.currentUser!.uid;
 
+    firestore.collection("quizUsers").doc(userId).get().then((value) {
+      if (!value.exists) {
+        Fluttertoast.showToast(msg: "User not found!");
+        return;
+      }
+
+      if (value.data()!['admin']) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => QuizAdminScreen()),
+        );
+      } else {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => QuizMainScreen()),
+        );
+      }
+    }).catchError((error) {});
   }
 }

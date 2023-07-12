@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class EditNoteScreen extends StatefulWidget {
@@ -6,19 +7,21 @@ class EditNoteScreen extends StatefulWidget {
     required this.note,
   }) : super(key: key);
 
-  final String note;
+  final Map<String, dynamic> note;
 
   @override
   State<EditNoteScreen> createState() => _EditNoteScreenState();
 }
 
 class _EditNoteScreenState extends State<EditNoteScreen> {
+  final firestore = FirebaseFirestore.instance;
+
   final noteController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    noteController.text = widget.note;
+    noteController.text = widget.note['note'];
   }
 
   @override
@@ -59,6 +62,18 @@ class _EditNoteScreenState extends State<EditNoteScreen> {
   void addNote() {
     String note = noteController.text;
 
-    Navigator.pop(context, note);
+    Map<String, dynamic> data = {
+      "note": note,
+    };
+
+    firestore
+        .collection("notes")
+        .doc(widget.note['noteId'])
+        .update(data)
+        .then((value ) {
+      Navigator.pop(context);
+    }).catchError((error) {
+      print(error);
+    });
   }
 }

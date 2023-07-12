@@ -1,24 +1,27 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class NotesRegisterScreen extends StatefulWidget {
+class QuizRegisterScreen extends StatefulWidget {
   @override
-  State<NotesRegisterScreen> createState() => _NotesRegisterScreenState();
+  State<QuizRegisterScreen> createState() => _QuizRegisterScreenState();
 }
 
-class _NotesRegisterScreenState extends State<NotesRegisterScreen> {
+class _QuizRegisterScreenState extends State<QuizRegisterScreen> {
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
   final emailController = TextEditingController();
-
   final passwordController = TextEditingController();
 
   final auth = FirebaseAuth.instance;
+  final firestore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Notes Register"),
+        title: const Text("Quiz Register"),
       ),
       body: SizedBox(
         width: double.infinity,
@@ -26,6 +29,32 @@ class _NotesRegisterScreenState extends State<NotesRegisterScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: nameController,
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.name,
+                decoration: const InputDecoration(
+                  labelText: 'Name',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.person,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: phoneController,
+                textInputAction: TextInputAction.next,
+                keyboardType: TextInputType.phone,
+                decoration: const InputDecoration(
+                  labelText: 'Phone',
+                  border: OutlineInputBorder(),
+                  prefixIcon: Icon(
+                    Icons.phone,
+                  ),
+                ),
+              ),
               const SizedBox(height: 20),
               TextFormField(
                 controller: emailController,
@@ -70,39 +99,46 @@ class _NotesRegisterScreenState extends State<NotesRegisterScreen> {
   }
 
   register() async {
+    String name = nameController.text;
+    String phone = phoneController.text;
     String email = emailController.text;
     String password = passwordController.text;
 
     auth
-        .createUserWithEmailAndPassword(
-      email: email,
-      password: password,
-    )
+        .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      Navigator.pop(context);
-      print('Account created!');
+      saveUserDataOnFirestore(name, phone, email);
     }).catchError((error) {
       print(error);
     });
+  }
 
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+  void saveUserDataOnFirestore(
+    String name,
+    String phone,
+    String email,
+  ) {
+    String userId = auth.currentUser!.uid;
 
+    Map<String, dynamic> data = {
+      "userId": userId,
+      "name": name,
+      "phone": phone,
+      "email": email,
+      "admin": false,
+    };
+
+    firestore.collection("quizUsers")
+    .doc(userId)
+    .set(data)
+    .then((value) {
+      auth.signOut();
       Navigator.pop(context);
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        print('The password provided is too weak.');
-        Fluttertoast.showToast(msg: 'The password provided is too weak.');
-      } else if (e.code == 'email-already-in-use') {
-        print('The account already exists for that email.');
-        Fluttertoast.showToast(
-            msg: "The account already exists for that email.");
-      }
-    } catch (e) {
-      print(e);
-    }
+      Fluttertoast.showToast(msg: "Account created!");
+    })
+    .catchError((error){
+      Fluttertoast.showToast(msg: error.toString());
+    });
+
   }
 }

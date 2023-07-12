@@ -35,7 +35,14 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   void getNotesFromFirestore() {
-    firestore.collection("notes").get().then((value) {
+    String userId = auth.currentUser!.uid;
+    print(userId);
+
+    firestore
+        .collection("notes")
+        .where("userId", isEqualTo: userId)
+        .get()
+        .then((value) {
       // notes.addAll(value.docs.map((e) => e.data()).toList());
       notes.clear();
       for (var document in value.docs) {
@@ -105,7 +112,10 @@ class _NotesScreenState extends State<NotesScreen> {
           ),
           IconButton(
             onPressed: () {
-              firestore.collection("notes").doc(notes[index]['noteId']).delete();
+              firestore
+                  .collection("notes")
+                  .doc(notes[index]['noteId'])
+                  .delete();
               notes.removeAt(index);
               setState(() {});
             },
@@ -134,14 +144,10 @@ class _NotesScreenState extends State<NotesScreen> {
         context,
         MaterialPageRoute(
           builder: (context) => EditNoteScreen(
-            note: "notes[index]",
+            note: notes[index],
           ),
         )).then((value) {
-      print('THEN => $value');
-      if (value == null) return;
-      // notes.add(value);
-      notes[index] = value;
-      setState(() {});
+      getNotesFromFirestore();
     });
   }
 }
