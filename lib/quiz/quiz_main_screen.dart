@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/quiz/quiz_login_screen.dart';
+import 'package:flutter24/quiz/start_quiz_screen.dart';
 
 class QuizMainScreen extends StatefulWidget {
   const QuizMainScreen({Key? key}) : super(key: key);
@@ -29,7 +30,19 @@ class _QuizMainScreenState extends State<QuizMainScreen> {
             icon: Icon(Icons.logout),
           ),
         ],
-
+      ),
+      body: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => StartQuizScreen(),
+              ),
+            );
+          },
+          child: const Text("Start Quiz"),
+        ),
       ),
     );
   }
