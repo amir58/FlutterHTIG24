@@ -3,6 +3,8 @@ import 'package:flutter24/blog/add_blog_screen.dart';
 import 'package:flutter24/blog/blog.dart';
 import 'package:flutter24/blog/edit_blog_screen.dart';
 import 'package:flutter24/blog/story_view_screen.dart';
+import 'package:flutter24/utils/app_image.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 class BlogScreen extends StatefulWidget {
   const BlogScreen({Key? key}) : super(key: key);
@@ -58,12 +60,13 @@ class _BlogScreenState extends State<BlogScreen> {
         child: Icon(
           Icons.add,
           color: blogs.length > 1 ? Colors.blueGrey : Colors.white,
+          size: 16.sp,
         ),
       ),
       body: Column(
         children: [
           SizedBox(
-            height: 100,
+            height: 45.sp,
             child: ListView.builder(
               itemCount: 8,
               scrollDirection: Axis.horizontal,
@@ -80,20 +83,25 @@ class _BlogScreenState extends State<BlogScreen> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(10.sp),
                         child: Stack(
                           alignment: Alignment.bottomRight,
                           children: [
-                            CircleAvatar(
-                              radius: 30,
-                              backgroundImage: NetworkImage(imageUrl),
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(50.sp),
+                              child: AppImage(
+                                imageUrl: imageUrl,
+                                width: 35.sp,
+                                height: 35.sp,
+                                fit: BoxFit.fill,
+                              ),
                             ),
-                            const CircleAvatar(
-                              radius: 11,
+                            CircleAvatar(
+                              radius: 13.sp,
                               backgroundColor: Colors.white,
                             ),
-                            const CircleAvatar(
-                              radius: 10,
+                            CircleAvatar(
+                              radius: 12.sp,
                               backgroundColor: Colors.green,
                             ),
                           ],
@@ -101,8 +109,8 @@ class _BlogScreenState extends State<BlogScreen> {
                       ),
                       Text(
                         name.length > 8 ? "${name.substring(0, 8)}.." : name,
-                        style: const TextStyle(
-                          fontSize: 13,
+                        style: TextStyle(
+                          fontSize: 15.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.blueGrey,
                         ),
@@ -130,38 +138,44 @@ class _BlogScreenState extends State<BlogScreen> {
     Blog blog = blogs[index];
 
     return Container(
-      margin: const EdgeInsets.all(15),
+      margin: EdgeInsets.all(15.sp),
       decoration: BoxDecoration(
         color: Colors.blueGrey,
-        borderRadius: BorderRadius.circular(25),
+        borderRadius: BorderRadius.circular(15.sp),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topRight: Radius.circular(25),
-              topLeft: Radius.circular(25),
+            borderRadius: BorderRadius.only(
+              topRight: Radius.circular(15.sp),
+              topLeft: Radius.circular(15.sp),
             ),
-            child: Image.network(
-              blog.imageUrl,
-              height: 200,
+            child: AppImage(
+              imageUrl: blog.imageUrl,
+              height: 25.h,
               width: double.infinity,
               fit: BoxFit.fill,
             ),
+            // Image.network(
+            //   blog.imageUrl,
+            //   height: 25.h,
+            //   width: double.infinity,
+            //   fit: BoxFit.fill,
+            // ),
           ),
-          const SizedBox(height: 10),
+          SizedBox(height: 10.sp),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.sp),
             child: Row(
               children: [
                 Expanded(
                   child: Text(
                     blog.title,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                     ),
                   ),
                 ),
@@ -169,39 +183,43 @@ class _BlogScreenState extends State<BlogScreen> {
                   onPressed: () {
                     navigateToEditBlogScreen(index);
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.edit,
                     color: Colors.white,
+                    size: 20.sp,
                   ),
                 ),
+                SizedBox(width: 10.sp),
                 IconButton(
                   onPressed: () {
                     blogs.removeAt(index);
                     setState(() {});
                   },
-                  icon: const Icon(
+                  icon: Icon(
                     Icons.delete,
                     color: Colors.red,
+                    size: 20.sp,
                   ),
                 ),
+                SizedBox(width: 10.sp),
               ],
             ),
           ),
-          const SizedBox(height: 5),
+          SizedBox(height: 15.sp),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.sp),
             child: Text(
               blog.content,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: TextStyle(
                 fontWeight: FontWeight.w400,
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 16.sp,
               ),
             ),
           ),
-          const SizedBox(height: 15),
+          SizedBox(height: 15.sp),
         ],
       ),
     );
