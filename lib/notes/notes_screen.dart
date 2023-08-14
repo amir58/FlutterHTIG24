@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/notes/add_note_screen.dart';
 import 'package:flutter24/notes/edit_note_screen.dart';
-import 'package:flutter24/notes/notes_login_screen.dart';
+import 'package:flutter24/notes/login/page/notes_login_screen.dart';
 
 class NotesScreen extends StatefulWidget {
   NotesScreen({Key? key}) : super(key: key);

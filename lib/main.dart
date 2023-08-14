@@ -4,9 +4,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/blog/blog_screen.dart';
-import 'package:flutter24/notes/notes_login_screen.dart';
+import 'package:flutter24/notes/login/page/notes_login_screen.dart';
+import 'package:flutter24/notes/notes_screen.dart';
 import 'package:flutter24/quiz/quiz_login_screen.dart';
 import 'package:flutter24/quiz/quiz_main_screen.dart';
+import 'package:flutter24/state_management/counter_cubit.dart';
+import 'package:flutter24/state_management/counter_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 // Connect Firebase to iOS
@@ -36,7 +40,15 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blueGrey,
           ),
-          home: const BlogScreen(),
+          home: FirebaseAuth.instance.currentUser == null
+              ? NotesLoginScreen()
+              : NotesScreen(),
+
+          // home: BlocProvider(
+          //   create: (_) => CounterCubit(),
+          //   child: CounterPage(),
+          // ),
+
           // home: FirebaseAuth.instance.currentUser == null
           //     ? QuizLoginScreen()
           //     : const QuizMainScreen(),
