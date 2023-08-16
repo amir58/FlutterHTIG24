@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/blog/blog_screen.dart';
 import 'package:flutter24/notes/login/page/notes_login_screen.dart';
-import 'package:flutter24/notes/notes_screen.dart';
+import 'package:flutter24/notes/notes/page/notes_screen.dart';
 import 'package:flutter24/quiz/quiz_login_screen.dart';
 import 'package:flutter24/quiz/quiz_main_screen.dart';
 import 'package:flutter24/state_management/counter_cubit.dart';

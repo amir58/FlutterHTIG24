@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter24/notes/login/cubit/login_cubit.dart';
 import 'package:flutter24/notes/login/cubit/login_states.dart';
-import 'package:flutter24/notes/notes_register_screen.dart';
-import 'package:flutter24/notes/notes_screen.dart';
+import 'package:flutter24/notes/register/page/notes_register_screen.dart';
+import 'package:flutter24/notes/notes/page/notes_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter24/notes/notes_register_screen.dart';
-import 'package:flutter24/notes/notes_screen.dart';
+import 'package:flutter24/notes/register/page/notes_register_screen.dart';
+import 'package:flutter24/notes/notes/page/notes_screen.dart';
 import 'package:flutter24/quiz/quiz_admin_screen.dart';
 import 'package:flutter24/quiz/quiz_main_screen.dart';
 import 'package:flutter24/quiz/quiz_register_screen.dart';
