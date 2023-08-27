@@ -85,3 +85,4 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   void onAddNoteFailure(String errorMessage) =>
       Fluttertoast.showToast(msg: errorMessage);
 }
+

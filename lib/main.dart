@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter24/apis/posts_screen.dart';
 import 'package:flutter24/blog/blog_screen.dart';
 import 'package:flutter24/notes/login/page/notes_login_screen.dart';
 import 'package:flutter24/notes/notes/page/notes_screen.dart';
@@ -40,9 +41,10 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.blueGrey,
           ),
-          home: FirebaseAuth.instance.currentUser == null
-              ? NotesLoginScreen()
-              : NotesScreen(),
+          home: PostsScreen(),
+          // home: FirebaseAuth.instance.currentUser == null
+          //     ? NotesLoginScreen()
+          //     : NotesScreen(),
 
           // home: BlocProvider(
           //   create: (_) => CounterCubit(),
