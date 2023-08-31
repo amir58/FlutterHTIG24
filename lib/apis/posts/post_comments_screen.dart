@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter24/apis/posts/models/comment.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PostCommentScreen extends StatefulWidget {
@@ -15,7 +16,7 @@ class PostCommentScreen extends StatefulWidget {
 }
 
 class _PostCommentScreenState extends State<PostCommentScreen> {
-  List<dynamic> comments = [];
+  List<Comment> comments = [];
 
   @override
   void initState() {
@@ -29,7 +30,12 @@ class _PostCommentScreenState extends State<PostCommentScreen> {
     final response = await Dio()
         .get("https://jsonplaceholder.typicode.com/posts/$postId/comments");
 
-    comments = response.data;
+    final List<dynamic> json = response.data;
+
+    for (var element in json) {
+      final comment = Comment.fromJson(element);
+      comments.add(comment);
+    }
 
     setState(() {});
   }
@@ -63,7 +69,7 @@ class _PostCommentScreenState extends State<PostCommentScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          comment['name'],
+                          comment.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -74,7 +80,7 @@ class _PostCommentScreenState extends State<PostCommentScreen> {
                         ),
                         SizedBox(height: 10.sp),
                         Text(
-                          comment['email'],
+                          comment.email,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -85,7 +91,7 @@ class _PostCommentScreenState extends State<PostCommentScreen> {
                         ),
                         SizedBox(height: 10.sp),
                         Text(
-                          comment['body'],
+                          comment.name,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18.sp,

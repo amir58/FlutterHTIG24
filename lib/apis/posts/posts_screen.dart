@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter24/apis/post_comments_screen.dart';
+import 'package:flutter24/apis/posts/post_comments_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 class PostsScreen extends StatefulWidget {

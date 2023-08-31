@@ -3,7 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter24/apis/posts_screen.dart';
+import 'package:flutter24/apis/news/news_screen.dart';
+import 'package:flutter24/apis/posts/posts_screen.dart';
 import 'package:flutter24/blog/blog_screen.dart';
 import 'package:flutter24/notes/login/page/notes_login_screen.dart';
 import 'package:flutter24/notes/notes/page/notes_screen.dart';
@@ -39,9 +40,9 @@ class MyApp extends StatelessWidget {
       builder: (p0, p1, p2) {
         return MaterialApp(
           theme: ThemeData(
-            primarySwatch: Colors.blueGrey,
+            primarySwatch: Colors.green,
           ),
-          home: PostsScreen(),
+          home: NewsScreen(),
           // home: FirebaseAuth.instance.currentUser == null
           //     ? NotesLoginScreen()
           //     : NotesScreen(),
