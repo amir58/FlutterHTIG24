@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter24/apis/ecommerce/login/view/e_login_screen.dart';
 import 'package:flutter24/apis/ecommerce/ecommerce_api.dart';
 import 'package:flutter24/apis/news/news_screen.dart';
 import 'package:flutter24/apis/posts/posts_screen.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          home: ERegisterScreen(),
+          home: ELoginScreen(),
           // home: FirebaseAuth.instance.currentUser == null
           //     ? NotesLoginScreen()
           //     : NotesScreen(),
