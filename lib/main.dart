@@ -1,20 +1,11 @@
 import 'package:device_preview/device_preview.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter24/apis/ecommerce/login/view/e_login_screen.dart';
-import 'package:flutter24/apis/ecommerce/ecommerce_api.dart';
-import 'package:flutter24/apis/news/news_screen.dart';
-import 'package:flutter24/apis/posts/posts_screen.dart';
-import 'package:flutter24/blog/blog_screen.dart';
-import 'package:flutter24/notes/login/page/notes_login_screen.dart';
-import 'package:flutter24/notes/notes/page/notes_screen.dart';
-import 'package:flutter24/quiz/quiz_login_screen.dart';
-import 'package:flutter24/quiz/quiz_main_screen.dart';
-import 'package:flutter24/state_management/counter_cubit.dart';
-import 'package:flutter24/state_management/counter_page.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter24/apis/ecommerce/data_source/local/app_shared_preferences.dart';
+import 'package:flutter24/apis/ecommerce/features/home/view/e_home_screen.dart';
+import 'package:flutter24/apis/ecommerce/features/login/view/e_login_screen.dart';
+import 'package:flutter24/apis/ecommerce/features/main_screen.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 // Connect Firebase to iOS
@@ -24,6 +15,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await PreferenceUtils.init();
   await Firebase.initializeApp();
 
   runApp(
@@ -44,7 +36,9 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),
-          home: ELoginScreen(),
+          home: PreferenceUtils.getString("apiToken").isEmpty
+              ? ELoginScreen()
+              : EMainScreen(),
           // home: FirebaseAuth.instance.currentUser == null
           //     ? NotesLoginScreen()
           //     : NotesScreen(),

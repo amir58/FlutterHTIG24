@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter24/apis/ecommerce/e_home_screen.dart';
-import 'package:flutter24/apis/ecommerce/login/cubit/e_login_cubit.dart';
-import 'package:flutter24/apis/ecommerce/login/cubit/e_login_state.dart';
+import 'package:flutter24/apis/ecommerce/data_source/local/app_shared_preferences.dart';
+import 'package:flutter24/apis/ecommerce/features/home/view/e_home_screen.dart';
+import 'package:flutter24/apis/ecommerce/features/login/cubit/e_login_cubit.dart';
+import 'package:flutter24/apis/ecommerce/features/login/cubit/e_login_state.dart';
 import 'package:flutter24/notes/login/cubit/login_states.dart';
 import 'package:flutter24/notes/register/page/notes_register_screen.dart';
 import 'package:flutter24/notes/notes/page/notes_screen.dart';
@@ -30,28 +31,13 @@ class _ELoginScreenState extends State<ELoginScreen> {
   final cubit = ELoginCubit();
 
   @override
-  void initState() {
-    super.initState();
-    checkApiToken();
-  }
-
-  void checkApiToken() async {
-    final pref = await SharedPreferences.getInstance();
-    String apiToken = pref.getString("apiToken") ?? "";
-
-    if (apiToken.isNotEmpty) {
-      onLoginSuccess();
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => cubit,
       child: BlocListener<ELoginCubit, ELoginState>(
         listener: (context, state) {
           if (state is ELoginSuccessState) onLoginSuccess();
-          print('BlocListener => $state');
+          if (state is ELoginFailureState) onLoginFailure(state.errorMessage);
         },
         child: Scaffold(
           appBar: AppBar(
@@ -186,5 +172,9 @@ class _ELoginScreenState extends State<ELoginScreen> {
         builder: (context) => EHomeScreen(),
       ),
     );
+  }
+
+  void onLoginFailure(String errorMessage) {
+    Fluttertoast.showToast(msg: errorMessage);
   }
 }
