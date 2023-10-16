@@ -6,6 +6,7 @@ import 'package:flutter24/apis/ecommerce/data_source/local/app_shared_preference
 import 'package:flutter24/apis/ecommerce/features/home/view/e_home_screen.dart';
 import 'package:flutter24/apis/ecommerce/features/login/view/e_login_screen.dart';
 import 'package:flutter24/apis/ecommerce/features/main_screen.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
 // Connect Firebase to iOS
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
     return ResponsiveSizer(
       builder: (p0, p1, p2) {
         return MaterialApp(
+          builder: EasyLoading.init(),
           theme: ThemeData(
             primarySwatch: Colors.green,
           ),

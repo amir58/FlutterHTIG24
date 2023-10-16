@@ -30,24 +30,6 @@ class _EHomeScreenState extends State<EHomeScreen> {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-            appBar: AppBar(
-              title: const Text("Home"),
-              actions: [
-                IconButton(
-                  onPressed: () async {
-                    PreferenceUtils.remove("apiToken");
-                    // PreferenceUtils.clear(); // To remove all data
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ELoginScreen(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.exit_to_app),
-                )
-              ],
-            ),
             body: state is EGetHomeSuccessState
                 ? Container(
                     child: Column(
